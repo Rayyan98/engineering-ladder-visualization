@@ -1,5 +1,31 @@
 import { useState } from 'react';
 import './App.css';
+import { descriptions } from './descriptions'
+
+function StepDescription(props: {
+  permDesc: {
+    Technology: string;
+    System: string;
+    People: string;
+    Process: string;
+    Influence: string;
+  },
+  tempDesc: {
+    Technology?: string;
+    System?: string;
+    People?: string;
+    Process?: string;
+    Influence?: string;
+  }
+}) {
+  return (<div style={{ color: 'darkgray', fontSize: '10pt', textAlign: 'left', display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <span style={{ height: '100%' }}><b>Technology</b>-{ props.tempDesc.Technology ?? props.permDesc.Technology }</span>
+    <span style={{ height: '100%' }}><b>System</b>-{ props.tempDesc.System ?? props.permDesc.System }</span>
+    <span style={{ height: '100%' }}><b>People</b>-{ props.tempDesc.People ?? props.permDesc.People }</span>
+    <span style={{ height: '100%' }}><b>Process</b>-{ props.tempDesc.Process ?? props.permDesc.Process }</span>
+    <span style={{ height: '100%' }}><b>Influence</b>-{ props.tempDesc.Influence ?? props.permDesc.Influence }</span>
+  </div>)
+}
 
 function Button(props: {
   name: string;
@@ -55,6 +81,10 @@ function App() {
 
   const [hoveringImgUrl, setHoveringImageUrl] = useState("");
 
+  const [curPermDesc, setPermCurDesc] = useState(descriptions[0]);
+
+  const [curTempDesc, setTempCurDesc] = useState({});
+
   const [button1State, setButton1State] = useState(true);
   const [button2State, setButton2State] = useState(false);
   const [button3State, setButton3State] = useState(false);
@@ -103,18 +133,21 @@ function App() {
     return (imageUrl: string) => {
       activateButton(buttonNumber)
       setImageUrl(imageUrl)
+      setPermCurDesc(descriptions[buttonNumber - 1])
     }
   }
 
   function getCallBackForMouseEnter(buttonNumber: number) {
     return (imageUrl: string) => {
       setHoveringImageUrl(imageUrl)
+      setTempCurDesc(descriptions[buttonNumber - 1])
     }
   }
 
   function getCallBackForMouseLeave(buttonNumber: number) {
     return (imageUrl: string) => {
       setHoveringImageUrl("")
+      setTempCurDesc({})
     }
   }
 
@@ -127,22 +160,24 @@ function App() {
               <Image imageUrl={ imageUrl } hoveringImageUrl={ hoveringImgUrl }></Image>
             </div>
           </div>
-          <div style={{ flex: 0.5, background: "inherit", display: "flex", flexDirection: "column" }}>            
-              <div className="row-div">
-                <Button name="D1" image="http://www.engineeringladders.com/charts/developer-1-dark.png" onClick={ getCallBackForButtonClick(1) } onMouseEnter={ getCallBackForMouseEnter(1) } onMouseLeave={ getCallBackForMouseLeave(1) } clicked={ button1State }></Button>
-                <button className="block-other"></button>
-                <button className="block-other"></button>
+          <div style={{ flex: 0.5, display: 'flex', flexDirection: 'column', maxWidth: "32%" }}>
+            <div style={{ flex: 3, background: "inherit", display: "flex", gap: '30px' }}>            
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <div className="row-div">
+                  <Button name="D1" image="http://www.engineeringladders.com/charts/developer-1-dark.png" onClick={ getCallBackForButtonClick(1) } onMouseEnter={ getCallBackForMouseEnter(1) } onMouseLeave={ getCallBackForMouseLeave(1) } clicked={ button1State }></Button>
+                </div>
+                <div className="row-div">
+                  <Button name="D2" image="http://www.engineeringladders.com/charts/developer-2-dark.png" onClick={ getCallBackForButtonClick(2) } onMouseEnter={ getCallBackForMouseEnter(2) } onMouseLeave={ getCallBackForMouseLeave(2) } clicked={ button2State }></Button>
+                </div>
+                <div className="row-div">
+                  <Button name="D3" image="http://www.engineeringladders.com/charts/developer-3-dark.png" onClick={ getCallBackForButtonClick(3) } onMouseEnter={ getCallBackForMouseEnter(3) } onMouseLeave={ getCallBackForMouseLeave(3) } clicked={ button3State }></Button>
+                </div>                
               </div>
-              <div className="row-div">
-                <Button name="D2" image="http://www.engineeringladders.com/charts/developer-2-dark.png" onClick={ getCallBackForButtonClick(2) } onMouseEnter={ getCallBackForMouseEnter(2) } onMouseLeave={ getCallBackForMouseLeave(2) } clicked={ button2State }></Button>
-                <button className="block-other"></button>
-                <button className="block-other"></button>
+              <div style={{ flex: 2, maxWidth: "66%" }}>
+                <StepDescription permDesc={curPermDesc} tempDesc={curTempDesc}></StepDescription>
               </div>
-              <div className="row-div">
-                <Button name="D3" image="http://www.engineeringladders.com/charts/developer-3-dark.png" onClick={ getCallBackForButtonClick(3) } onMouseEnter={ getCallBackForMouseEnter(3) } onMouseLeave={ getCallBackForMouseLeave(3) } clicked={ button3State }></Button>
-                <button className="block-other"></button>
-                <button className="block-other"></button>
-              </div>
+            </div>
+            <div style={{ flex: 4, background: "inherit", display: "flex", flexDirection: "column" }}>            
               <div className="row-div">
                 <Button name="D4" image="http://www.engineeringladders.com/charts/developer-4-dark.png" onClick={ getCallBackForButtonClick(4) } onMouseEnter={ getCallBackForMouseEnter(4) } onMouseLeave={ getCallBackForMouseLeave(4) } clicked={ button4State }></Button>
                 <Button name="T1" image="http://www.engineeringladders.com/charts/techlead-4-dark.png" onClick={ getCallBackForButtonClick(5) } onMouseEnter={ getCallBackForMouseEnter(5) } onMouseLeave={ getCallBackForMouseLeave(5) } clicked={ button5State }></Button>
@@ -163,6 +198,7 @@ function App() {
                 <Button name="T4" image="http://www.engineeringladders.com/charts/techlead-7-dark.png" onClick={ getCallBackForButtonClick(13) } onMouseEnter={ getCallBackForMouseEnter(13) } onMouseLeave={ getCallBackForMouseLeave(13) } clicked={ button13State }></Button>
                 <Button name="M3" image="http://www.engineeringladders.com/charts/engineeringmanager-7-dark.png" onClick={ getCallBackForButtonClick(14) } onMouseEnter={ getCallBackForMouseEnter(14) } onMouseLeave={ getCallBackForMouseLeave(14) } clicked={ button14State }></Button>
               </div>
+            </div>
           </div>
           <div style={{ flex: 0.07 }}></div>
         </div>
