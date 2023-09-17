@@ -18,7 +18,7 @@ function StepDescription(props: {
     Influence?: string;
   }
 }) {
-  return (<div style={{ color: 'darkgray', fontSize: '10pt', textAlign: 'left', display: 'flex', flexDirection: 'column', height: '100%' }}>
+  return (<div style={{ color: 'darkgray', fontSize: '1vw', textAlign: 'left', display: 'flex', flexDirection: 'column', height: '100%' }}>
     <span style={{ height: '100%' }}><b>Technology</b>-{ props.tempDesc.Technology ?? props.permDesc.Technology }</span>
     <span style={{ height: '100%' }}><b>System</b>-{ props.tempDesc.System ?? props.permDesc.System }</span>
     <span style={{ height: '100%' }}><b>People</b>-{ props.tempDesc.People ?? props.permDesc.People }</span>
@@ -161,7 +161,7 @@ function App() {
             </div>
           </div>
           <div style={{ flex: 0.5, display: 'flex', flexDirection: 'column', maxWidth: "32%" }}>
-            <div style={{ flex: 3, background: "inherit", display: "flex", gap: '30px' }}>            
+            <div style={{ flex: 3, background: "inherit", display: "flex", gap: '30px', maxHeight: '43%' }}>            
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div className="row-div">
                   <Button name="D1" image="http://www.engineeringladders.com/charts/developer-1-dark.png" onClick={ getCallBackForButtonClick(1) } onMouseEnter={ getCallBackForMouseEnter(1) } onMouseLeave={ getCallBackForMouseLeave(1) } clicked={ button1State }></Button>
