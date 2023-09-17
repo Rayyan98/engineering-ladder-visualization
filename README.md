@@ -1,4 +1,12 @@
-# Getting Started with Create React App
+# A quick react based visualization of engineering ladders
+
+Site available at [https://rayyan98.github.io/engineering-ladder-visualization/](https://rayyan98.github.io/engineering-ladder-visualization/)
+
+All credit for information, copyrights and intellectual property belong to the site [http://www.engineeringladders.com/](http://www.engineeringladders.com/)
+
+This repo just serves as a visualization for the same content in order better understand the differences between the engineering positions
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
